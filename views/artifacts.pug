@@ -1,0 +1,31 @@
+extends layout
+ 
+block content
+  h1= title
+ 
+  // Unbuffered code block to define results array
+  -
+    let results = [
+      { artifactName: "Terracotta Warrior", originYear: "210 BCE", culture: "Chinese" },
+      { artifactName: "Inca Sun Disk", originYear: "1400 CE", culture: "Incan" },
+      { artifactName: "Roman Gladiator Helmet", originYear: "100 CE", culture: "Roman" }
+    ];
+ 
+  // Container for Bootstrap grid
+  .container-fluid
+    .row
+      // Loop through each item in the results array
+      each artifact, index in results
+        .col-sm-2
+          h3 #{artifact.artifactName}
+          p Origin Year: #{artifact.originYear}
+          p Culture: #{artifact.culture}
+          
+          // Button that calls buy() function with the index of the artifact
+          button(type="button", class="btn btn-outline-success", onclick=`buy(${index + 1})`) Purchase
+ 
+  // Script to define the buy() function
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}`);
+    }
