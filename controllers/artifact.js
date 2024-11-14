@@ -1,5 +1,5 @@
 var Artifact = require('../models/artifact');
-// List of all artifacts
+
 exports.artifact_list =  async function(req, res) {
     try {
         // Fetch all artifacts from the database
@@ -11,7 +11,7 @@ exports.artifact_list =  async function(req, res) {
         res.status(500).send(`{"error": ${err}}`);  
     }
 };
-// for a specific artifacts.
+
 exports.artifact_detail = async function(req, res) {
     console.log("detail: " + req.params.id);
     try {
@@ -25,7 +25,6 @@ exports.artifact_detail = async function(req, res) {
     }
    };
    
-// Handle artifacts create on POST.
 exports.artifact_create_post = async function(req, res) {
     console.log(req.body); 
 
@@ -42,11 +41,29 @@ exports.artifact_create_post = async function(req, res) {
         res.status(500).send({ error: err.message });
     }
 };
-// Handle artifacts delete from on DELETE.
+
+exports.artifact_update_put = async function(req, res) {
+    console.log(`Update on id ${req.params.id} with body ${JSON.stringify(req.body)}`);
+    try {
+        let toUpdate = await Artifact.findById(req.params.id);
+        
+        if (!toUpdate) {
+            return res.status(404).send(`{"error": "Artifact with id ${req.params.id} not found"}`);
+        }
+
+        // Do updates of properties
+        toUpdate.artifactName = req.body.artifactName;
+        toUpdate.originYear = req.body.originYear;
+        toUpdate.culture = req.body.culture;
+
+        let result = await toUpdate.save();
+        console.log("Success " + result);
+        res.send(result);
+    } catch (err) {
+        res.status(500).send(`{"error": "Update for id ${req.params.id} failed due to error: ${err}"}`);
+    }
+};
+
 exports.artifact_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Artifact delete DELETE ' + req.params.id);
-};
-// Handle artifacts update form on PUT.
-exports.artifact_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: Artifact update PUT' + req.params.id);
-};
+    res.send('NOT IMPLEMENTED: Artifact delete DELETE ' + req.params.id);
+   };

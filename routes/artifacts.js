@@ -8,4 +8,5 @@ router.get('/', artifact_controller.artifact_list);
 // POST request to create a new artifact
 router.post('/artifacts', artifact_controller.artifact_create_post);
 router.get('/artifacts/:id', artifact_controller.artifact_detail);
+router.put('/artifacts/:id', artifact_controller.artifact_update_put);
 module.exports = router;
