@@ -12,7 +12,7 @@ router.get('/', api_controller.api);
 // Artifacts Routes
 router.get('/artifacts', artifact_controller.artifact_list);
 router.get('/artifacts/:id', artifact_controller.artifact_detail);
-router.post('/artifacts/:id', artifact_controller.artifact_create_post);
+router.post('/artifacts', artifact_controller.artifact_create_post);
 router.delete('/artifacts/:id', artifact_controller.artifact_delete);
 router.put('/artifacts/:id', artifact_controller.artifact_update_put);
 
