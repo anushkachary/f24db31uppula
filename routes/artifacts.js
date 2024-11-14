@@ -1,9 +1,10 @@
+// routes/potion.js
 var express = require('express');
 var router = express.Router();
-
-/* GET home page. */
+ 
+/* GET potion page. */
 router.get('/', function(req, res, next) {
-  res.render('artifacts', { title: 'Search Results Artifacts' });
+  res.render('artifact', { title: 'Search Results for Artifacts' });
 });
-
+ 
 module.exports = router;
