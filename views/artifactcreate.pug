@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+  form(id='ArtifactForm', action="/resource/artifacts", method="POST")
+    div.form-group
+      label.artifactAttr(for='artifactName') Artifact Name
+      input#artifactName(type='text', name='artifactName', class='form-control', required)
+    div.form-group
+      label.artifactAttr(for='originYear') Origin Year
+      input#originYear(type='text', name='originYear', class='form-control', required)
+    div.form-group
+      label.artifactAttr(for='culture') Culture
+      input#culture(type='text', name='culture', class='form-control', required)
+    button(type='submit', class='btn btn-primary mt-3') Create Artifact
+
+  script.
+    document.forms['ArtifactForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      alert("Submitting form...");
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target))
+      }).then((resp) => {
+        if (!resp.ok) throw new Error(resp.statusText);
+        return resp.json();
+      }).then((body) => {
+        alert("Save succeeded");
+        console.log("Server response:", body);
+      }).catch((error) => {
+        alert("Save failed: " + error);
+      });
+    });

@@ -14,3 +14,13 @@ exports.artifact_view_one_Page = async function (req, res) {
     }
   };
   
+  exports.artifact_create_Page = function (req, res) {
+    console.log("Create view");
+    try {
+      res.render('artifactcreate', { title: 'Create Artifact' });
+    } catch (err) {
+      res.status(500);
+      res.send(`{'error': '${err}'}`);
+    }
+  };
+  
