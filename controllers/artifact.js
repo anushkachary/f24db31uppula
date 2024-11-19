@@ -64,6 +64,14 @@ exports.artifact_update_put = async function(req, res) {
     }
 };
 
-exports.artifact_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Artifact delete DELETE ' + req.params.id);
+exports.artifact_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Artifact.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
    };
