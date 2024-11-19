@@ -1,0 +1,71 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let artifactId = toShow._id
+    - let artifactName = toShow.artifactName
+    - let originYear = toShow.originYear
+    - let culture = toShow.culture
+    - let actionid = "/resource/artifacts/" + artifactId
+
+    script.
+      let actionid = "#{actionid}"
+
+    div.container
+      div.row.mb-4
+        div.col-md-12
+          p Artifact details for deletion
+
+      div.row.mb-3
+        div.col-md-3
+          div(class='artifactAttr') Costume ID:
+        div.col-md-9
+          div #{artifactId}
+
+      div.row.mb-3
+        div.col-md-3
+          div(class='artifactAttr') Artifact Name:
+        div.col-md-9
+          div #{artifactName}
+
+      div.row.mb-3
+        div.col-md-3
+          div(class='artifactAttr') Origin Year:
+        div.col-md-9
+          div #{originYear}
+
+      div.row.mb-3
+        div.col-md-3
+          div(class='artifactAttr') Culture:
+        div.col-md-9
+          div #{culture}
+
+      // Buttons for delete and cancel
+      div.row.mt-4
+        div.col-md-6
+          button.btn.btn-danger.w-100(onclick="deleteOnid()") Delete
+        div.col-md-6
+          button.btn.btn-secondary.w-100(onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        window.location.href='/artifacts'
+      }
+
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        fetch(actionid, {
+          method: 'DELETE'
+        }).then((resp) => {
+          return resp.json();
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/artifacts'
+        }).catch((error) => {
+          alert("Delete failed " + error)
+        });
+      }

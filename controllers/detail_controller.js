@@ -35,3 +35,15 @@ exports.artifact_update_Page = async function(req, res) {
     }
   };
   
+  exports.artifact_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await Artifact.findById(req.query.id)
+    res.render('artifactdelete', { title: 'Artifact Delete', toShow: 
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
