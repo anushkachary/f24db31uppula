@@ -9,5 +9,9 @@ a {
 
 .artifactAttr {
   background-color: aquamarine;
-  width: 120px;
- }
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}

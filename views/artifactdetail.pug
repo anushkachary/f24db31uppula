@@ -2,22 +2,32 @@ extends layout
 
 block content
   h1= title
-  - let artifactId = toShow._id
-  - let artifactName = toShow.artifactName
-  - let artifactOriginYear = toShow.originYear
-  - let artifactCulture = toShow.culture
 
-  div
-  div.row
-    div(class='artifactAttr mr-3') Artifact ID is:
-    div #{artifactId}
-  div.row
-    div(class='artifactAttr mr-3') Artifact Name is:
-    div #{artifactName}
-  div.row
-    div(class='artifactAttr mr-3') Artifact Origin Year is:
-    div #{artifactOriginYear}
-  div.row
-    div(class='artifactAttr mr-3') Artifact Culture is:
-    div #{artifactCulture}
-  a.btn.btn-primary(href="/artifacts") Back to Collection
+  if (toShow == null)
+    div.alert.alert-danger
+      h3 Error: Artifact not found.
+      p The artifact with the provided ID does not exist in the collection.
+      a.btn.btn-primary(href="/artifacts") Back to Collection
+  else
+    - let artifactId = toShow._id
+    - let artifactName = toShow.artifactName
+    - let artifactOriginYear = toShow.originYear
+    - let artifactCulture = toShow.culture
+
+    div.container
+      div.card.shadow.mb-4
+        div.card-body
+          div.row.mb-3
+            div.col-md-4.font-weight-bold Artifact ID:
+            div.col-md-8 #{artifactId}
+          div.row.mb-3
+            div.col-md-4.font-weight-bold Artifact Name:
+            div.col-md-8 #{artifactName}
+          div.row.mb-3
+            div.col-md-4.font-weight-bold Artifact Origin Year:
+            div.col-md-8 #{artifactOriginYear}
+          div.row.mb-3
+            div.col-md-4.font-weight-bold Artifact Culture:
+            div.col-md-8 #{artifactCulture}
+
+      a.btn.btn-primary(href="/artifacts") Back to Collection
