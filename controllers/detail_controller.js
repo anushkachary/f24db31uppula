@@ -24,3 +24,14 @@ exports.artifact_view_one_Page = async function (req, res) {
     }
   };
   
+exports.artifact_update_Page = async function(req, res) {
+    console.log("Update view for item " + req.query.id);
+    try {
+      let result = await Artifact.findById(req.query.id);
+      res.render('artifactupdate', { title: 'Artifact Update', toShow: result });
+    } catch (err) {
+      res.status(500);
+      res.send(`{'error': '${err}'}`);
+    }
+  };
+  

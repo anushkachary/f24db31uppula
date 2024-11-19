@@ -13,4 +13,6 @@ router.put('/artifacts/:id', artifact_controller.artifact_update_put);
 router.delete('/artifacts/:id', artifact_controller.artifact_delete);
 router.get('/detail', detail_controller.artifact_view_one_Page);
 router.get('/create', detail_controller.artifact_create_Page);
+router.get('/update', detail_controller.artifact_update_Page);
+
 module.exports = router;

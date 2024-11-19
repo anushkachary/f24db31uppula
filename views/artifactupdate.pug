@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  h1= title
+  - let artifactId = toShow._id
+  - let artifactName = toShow.artifactName
+  - let originYear = toShow.originYear
+  - let culture = toShow.culture
+  
+  div.row(class='mb-4')
+    div.col-md-12
+      p.m-0
+        | ID is: 
+        span.font-weight-bold #{artifactId}
+
+  - let actionid = "/resource/artifacts/" + artifactId
+  form(id='ArtifactForm', action= actionid, method="PUT")
+    div.form-group
+      label.artifactAttr(for='artifactName') Artifact Name
+      input#artifactName.form-control(type='text', name='artifactName', value=artifactName)
+
+    div.form-group
+      label.artifactAttr(for='originYear') Origin Year
+      input#originYear.form-control(type='text', name='originYear', value=originYear)
+
+    div.form-group
+      label.artifactAttr(for='culture') Culture
+      input#culture.form-control(type='text', name='culture', value=culture)
+
+    // Submit button
+    div.form-group
+      input(type="submit", class="btn btn-primary")
+
+  script.
+    document.forms['ArtifactForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target))
+      }).then((resp) => {
+        return resp.json();
+      }).then((body) => {
+        alert("Update succeeded");
+        console.log("Server response:", body);
+      }).catch((error) => {
+        alert("Update failed: " + error);
+      });
+    });
