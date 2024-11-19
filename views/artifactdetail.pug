@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  - let artifactId = toShow._id
+  - let artifactName = toShow.artifactName
+  - let artifactOriginYear = toShow.originYear
+  - let artifactCulture = toShow.culture
+
+  div
+  div.row
+    div(class='artifactAttr mr-3') Artifact ID is:
+    div #{artifactId}
+  div.row
+    div(class='artifactAttr mr-3') Artifact Name is:
+    div #{artifactName}
+  div.row
+    div(class='artifactAttr mr-3') Artifact Origin Year is:
+    div #{artifactOriginYear}
+  div.row
+    div(class='artifactAttr mr-3') Artifact Culture is:
+    div #{artifactCulture}
+  a.btn.btn-primary(href="/collections") Back to Collection
