@@ -2,25 +2,19 @@ extends layout
  
 block content
   h1= title
- 
-  // Unbuffered code block to define results array
-  -
- 
-  // Container for Bootstrap grid
-  .container-fluid
-    .row
-      // Loop through each item in the results array
-      each artifact, index in results
-        .col-sm-2
-          h3 #{artifact.artifactName}
-          p Origin Year: #{artifact.originYear}
-          p Culture: #{artifact.culture}
-          
-          // Button that calls buy() function with the index of the artifact
-          button(type="button", class="btn btn-outline-success", onclick=`buy(${index + 1})`) Purchase
- 
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row")
+      each item in items
+        - let destination = `dispatch(\"/artifacts/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.artifactName}(#{item.originYear}) is #{item.culture}
+          button.btn( class="btn-primary ml-1", onclick= destination) Update
+
   // Script to define the buy() function
   script.
     function buy(index) {
       alert(`You purchased item ${index}`);
+    }
+    function dispatch(path) {
+      window.location.href=path
     }
