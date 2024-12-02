@@ -18,3 +18,13 @@ block content
       document.getElementById("boost").innerText = `Boosted ${value} by ${amt}.`;
     }
  
+  if (!user)
+    br
+    a(href="/login") Login
+    br
+    a(href="/register") Register
+  if (user)
+    p You are currently logged in as #{user.username}
+    a(href="/artifacts") Take me to artifacts
+    br
+    a(href="/logout") Logout
