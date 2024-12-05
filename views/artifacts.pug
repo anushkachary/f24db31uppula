@@ -3,11 +3,9 @@ extends layout
 block content
   h1= title
 
-  // Add "Create" button at the top
   div(class="mb-3 text-center")
     button.btn.btn-success(onclick="dispatch('/artifacts/create')") Create New Artifact
 
-  // Check if results exist
   if results && results.length
     div(class="container")
       div(class="row g-3")
