@@ -2,19 +2,33 @@ extends layout
  
 block content
   h1= title
-  - let items = results;
-  div(class="container-fluid")
-    div(class="row")
-      each item in items
-        - let destination = `dispatch(\"/artifacts/update?id=${item._id}\")`
-        div(class="row-sm-2", class="m-1") Item #{item.artifactName}(#{item.originYear}) is #{item.culture}
-          button.btn( class="btn-primary ml-1", onclick= destination) Update
 
-  // Script to define the buy() function
+  // Add "Create" button at the top
+  div(class="mb-3 text-center")
+    button.btn.btn-success(onclick="dispatch('/artifacts/create')") Create New Artifact
+
+  // Check if results exist
+  if results && results.length
+    div(class="container")
+      div(class="row g-3")
+        each item in results
+          - let updateDestination = `/artifacts/update?id=${item._id}`;
+          - let detailDestination = `/artifacts/detail?id=${item._id}`;
+          - let deleteDestination = `/artifacts/delete?id=${item._id}`;
+          div(class="col-md-4 col-sm-6")
+            div(class="card shadow-sm h-100")
+              div(class="card-body")
+                h5.card-title #{item.artifactName}
+                p.card-text #{item.culture} (#{item.originYear})
+                div(class="d-flex justify-content-between mt-3")
+                  button.btn.btn-primary(onclick=`dispatch('${updateDestination}')`) Update
+                  button.btn.btn-info(onclick=`dispatch('${detailDestination}')`) Details
+                  button.btn.btn-danger(onclick=`dispatch('${deleteDestination}')`) Delete
+  else
+    div(class="text-center mt-5")
+      h3 No artifacts found.
+
   script.
-    function buy(index) {
-      alert(`You purchased item ${index}`);
-    }
-    function dispatch(path) {
-      window.location.href=path
-    }
+      function dispatch(path) {
+        window.location.href = path;
+      }

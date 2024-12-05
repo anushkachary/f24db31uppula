@@ -53,7 +53,7 @@ async function recreateDB() {
   await Artifact.deleteMany();
   // Create instances of artifacts
   let instance1 = new Artifact({ artifactName: "Rosetta Stone", originYear: "196 BC", culture: "Ancient Egyptian" });
-  let instance2 = new Artifact({ artifactName: "Terracotta Army", originYear: "210–209 BC", culture: "Ancient Chinese" });
+  let instance2 = new Artifact({ artifactName: "Terracotta Army", originYear: "209 BC", culture: "Ancient Chinese" });
   let instance3 = new Artifact({ artifactName: "Bust of Nefertiti", originYear: "1345 BC", culture: "Ancient Egyptian" });
 
   // Save instances to the database
